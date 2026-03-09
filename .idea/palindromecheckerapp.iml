@@ -22,22 +22,34 @@ public class PalindromeChecker {
             System.out.println("It is not a Palindrome.");
         }
 
-        // -------- CASE INSENSITIVE & SPACE IGNORED CHECK --------
+        // -------- OBJECT ORIENTED PALINDROME SERVICE --------
 
-        // Normalize string (remove spaces and ignore case)
-        String normalized = text.replaceAll("\\s+", "").toLowerCase();
+        PalindromeService service = new PalindromeService();
+        boolean result = service.checkPalindrome(text);
 
-        String reversedNormalized = "";
-        for (int i = normalized.length() - 1; i >= 0; i--) {
-            reversedNormalized += normalized.charAt(i);
-        }
-
-        if (normalized.equals(reversedNormalized)) {
-            System.out.println("Case-Insensitive & Space-Ignored Check: It is a Palindrome.");
+        if (result) {
+            System.out.println("OOP Service Check: It is a Palindrome.");
         } else {
-            System.out.println("Case-Insensitive & Space-Ignored Check: It is not a Palindrome.");
+            System.out.println("OOP Service Check: It is not a Palindrome.");
         }
 
         scanner.close();
+    }
+}
+
+// Service class encapsulating palindrome logic
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        String cleaned = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        String reversed = "";
+
+        for (int i = cleaned.length() - 1; i >= 0; i--) {
+            reversed += cleaned.charAt(i);
+        }
+
+        return cleaned.equals(reversed);
     }
 }
