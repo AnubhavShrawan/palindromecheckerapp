@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindromeChecker {
     public static void main(String[] args) {
@@ -22,26 +24,31 @@ public class PalindromeChecker {
             System.out.println("It is not a Palindrome.");
         }
 
-        // -------- Stack Based Palindrome Check (UC5 functionality) --------
+        // -------- UC6: Queue + Stack Palindrome Check --------
 
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        // Push characters into stack
+        // Push to stack and enqueue to queue
         for (int i = 0; i < cleaned.length(); i++) {
-            stack.push(cleaned.charAt(i));
+            stack.push(cleaned.charAt(i));      // LIFO
+            queue.add(cleaned.charAt(i));       // FIFO
         }
 
-        // Pop characters to create reversed string
-        String stackReversed = "";
-        while (!stack.isEmpty()) {
-            stackReversed += stack.pop();
+        boolean isPalindrome = true;
+
+        // Compare pop from stack and dequeue from queue
+        while (!stack.isEmpty() && !queue.isEmpty()) {
+            if (stack.pop() != queue.remove()) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare original and stack reversed
-        if (cleaned.equals(stackReversed)) {
-            System.out.println("It is a Palindrome (using Stack).");
+        if (isPalindrome) {
+            System.out.println("It is a Palindrome (using Queue + Stack).");
         } else {
-            System.out.println("It is not a Palindrome (using Stack).");
+            System.out.println("It is not a Palindrome (using Queue + Stack).");
         }
 
         scanner.close();
