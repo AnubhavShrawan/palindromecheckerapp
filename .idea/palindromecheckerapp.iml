@@ -1,45 +1,51 @@
 import java.util.Scanner;
 
 public class PalindromeChecker {
-
     public static void main(String[] args) {
 
-        // UC3: Palindrome Check Using String Reverse
-        String original = "level";
-        String reversedString = "";
-
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversedString += original.charAt(i);
-        }
-
-        System.out.println("Original String: " + original);
-        System.out.println("Reversed String: " + reversedString);
-
-        if (original.equals(reversedString)) {
-            System.out.println("Result: It is a Palindrome.");
-        } else {
-            System.out.println("Result: It is not a Palindrome.");
-        }
-
-        System.out.println("--------------------------------");
-
-        // Your Existing Code (kept as it is)
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a word: ");
         String text = scanner.nextLine();
 
         String cleaned = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        String reversed = "";
 
+        // -------- Your existing reverse logic (kept as it is) --------
+        String reversed = "";
         for (int i = cleaned.length() - 1; i >= 0; i--) {
             reversed += cleaned.charAt(i);
         }
 
         if (cleaned.equals(reversed)) {
-            System.out.println("It is a Palindrome.");
+            System.out.println("It is a Palindrome (using reverse method).");
         } else {
-            System.out.println("It is not a Palindrome.");
+            System.out.println("It is not a Palindrome (using reverse method).");
+        }
+
+        // -------- Added functionality from the assignment --------
+
+        // Convert String to char array
+        char[] characters = cleaned.toCharArray();
+
+        // Two pointer approach
+        int start = 0;
+        int end = characters.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        if (isPalindrome) {
+            System.out.println("It is a Palindrome (using char array & two-pointer).");
+        } else {
+            System.out.println("It is not a Palindrome (using char array & two-pointer).");
         }
 
         scanner.close();
