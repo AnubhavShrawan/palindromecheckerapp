@@ -2,23 +2,6 @@ import java.util.Scanner;
 
 public class PalindromeChecker {
 
-    // Recursive function to check palindrome
-    public static boolean isPalindromeRecursive(String str, int start, int end) {
-
-        // Base condition
-        if (start >= end) {
-            return true;
-        }
-
-        // If characters don't match
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindromeRecursive(str, start + 1, end - 1);
-    }
-
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -28,7 +11,6 @@ public class PalindromeChecker {
 
         String cleaned = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        // -------- YOUR ORIGINAL METHOD --------
         String reversed = "";
         for (int i = cleaned.length() - 1; i >= 0; i--) {
             reversed += cleaned.charAt(i);
@@ -40,13 +22,20 @@ public class PalindromeChecker {
             System.out.println("It is not a Palindrome.");
         }
 
-        // -------- RECURSIVE METHOD (ASSIGNMENT REQUIREMENT) --------
-        boolean result = isPalindromeRecursive(cleaned, 0, cleaned.length() - 1);
+        // -------- CASE INSENSITIVE & SPACE IGNORED CHECK --------
 
-        if (result) {
-            System.out.println("Recursive Check: It is a Palindrome.");
+        // Normalize string (remove spaces and ignore case)
+        String normalized = text.replaceAll("\\s+", "").toLowerCase();
+
+        String reversedNormalized = "";
+        for (int i = normalized.length() - 1; i >= 0; i--) {
+            reversedNormalized += normalized.charAt(i);
+        }
+
+        if (normalized.equals(reversedNormalized)) {
+            System.out.println("Case-Insensitive & Space-Ignored Check: It is a Palindrome.");
         } else {
-            System.out.println("Recursive Check: It is not a Palindrome.");
+            System.out.println("Case-Insensitive & Space-Ignored Check: It is not a Palindrome.");
         }
 
         scanner.close();
