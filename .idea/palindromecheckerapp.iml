@@ -3,6 +3,13 @@ import java.util.Scanner;
 public class PalindromeChecker {
 
     public static void main(String[] args) {
+
+        // Application Entry & Welcome Message
+        System.out.println("=================================");
+        System.out.println(" Welcome to Palindrome Checker ");
+        System.out.println(" Application Version: 1.0 ");
+        System.out.println("=================================");
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a word: ");
@@ -23,4 +30,5 @@ public class PalindromeChecker {
 
         scanner.close();
     }
+}
 }
