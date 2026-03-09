@@ -1,34 +1,42 @@
-import java.util.Scanner;
+`import java.util.Scanner;
 
-public class PalindromeChecker {
+ public class PalindromeChecker {
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
-        // Application Entry & Welcome Message
-        System.out.println("=================================");
-        System.out.println(" Welcome to Palindrome Checker ");
-        System.out.println(" Application Version: 1.0 ");
-        System.out.println("=================================");
+         // UC2: Hardcoded Palindrome Check
+         String hardcoded = "madam";
+         String reversedHardcoded = "";
 
-        Scanner scanner = new Scanner(System.in);
+         for (int i = hardcoded.length() - 1; i >= 0; i--) {
+             reversedHardcoded += hardcoded.charAt(i);
+         }
 
-        System.out.print("Enter a word: ");
-        String text = scanner.nextLine();
+         if (hardcoded.equals(reversedHardcoded)) {
+             System.out.println("Hardcoded word '" + hardcoded + "' is a Palindrome.");
+         } else {
+             System.out.println("Hardcoded word '" + hardcoded + "' is not a Palindrome.");
+         }
 
-        String cleaned = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        String reversed = "";
+         // Existing Code (Kept As It Is)
+         Scanner scanner = new Scanner(System.in);
 
-        for (int i = cleaned.length() - 1; i >= 0; i--) {
-            reversed += cleaned.charAt(i);
-        }
+         System.out.print("Enter a word: ");
+         String text = scanner.nextLine();
 
-        if (cleaned.equals(reversed)) {
-            System.out.println("It is a Palindrome.");
-        } else {
-            System.out.println("It is not a Palindrome.");
-        }
+         String cleaned = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+         String reversed = "";
 
-        scanner.close();
-    }
-}
-}
+         for (int i = cleaned.length() - 1; i >= 0; i--) {
+             reversed += cleaned.charAt(i);
+         }
+
+         if (cleaned.equals(reversed)) {
+             System.out.println("It is a Palindrome.");
+         } else {
+             System.out.println("It is not a Palindrome.");
+         }
+
+         scanner.close();
+     }
+ `
