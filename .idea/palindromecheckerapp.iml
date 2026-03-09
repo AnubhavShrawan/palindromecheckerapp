@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeChecker {
     public static void main(String[] args) {
@@ -10,42 +11,37 @@ public class PalindromeChecker {
 
         String cleaned = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        // -------- Your existing reverse logic (kept as it is) --------
         String reversed = "";
         for (int i = cleaned.length() - 1; i >= 0; i--) {
             reversed += cleaned.charAt(i);
         }
 
         if (cleaned.equals(reversed)) {
-            System.out.println("It is a Palindrome (using reverse method).");
+            System.out.println("It is a Palindrome.");
         } else {
-            System.out.println("It is not a Palindrome (using reverse method).");
+            System.out.println("It is not a Palindrome.");
         }
 
-        // -------- Added functionality from the assignment --------
+        // -------- Stack Based Palindrome Check (UC5 functionality) --------
 
-        // Convert String to char array
-        char[] characters = cleaned.toCharArray();
+        Stack<Character> stack = new Stack<>();
 
-        // Two pointer approach
-        int start = 0;
-        int end = characters.length - 1;
-
-        boolean isPalindrome = true;
-
-        while (start < end) {
-            if (characters[start] != characters[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Push characters into stack
+        for (int i = 0; i < cleaned.length(); i++) {
+            stack.push(cleaned.charAt(i));
         }
 
-        if (isPalindrome) {
-            System.out.println("It is a Palindrome (using char array & two-pointer).");
+        // Pop characters to create reversed string
+        String stackReversed = "";
+        while (!stack.isEmpty()) {
+            stackReversed += stack.pop();
+        }
+
+        // Compare original and stack reversed
+        if (cleaned.equals(stackReversed)) {
+            System.out.println("It is a Palindrome (using Stack).");
         } else {
-            System.out.println("It is not a Palindrome (using char array & two-pointer).");
+            System.out.println("It is not a Palindrome (using Stack).");
         }
 
         scanner.close();
